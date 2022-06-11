@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lore Posting Demo</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@editorjs/paragraph@latest"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@editorjs/image@2.3.0"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@editorjs/embed@latest"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@editorjs/quote@latest"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/editorjs-html@3.4.0/build/edjsHTML.js"></script>
+
+
+    <!-- jQuery library -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+    <!-- Web3.js LIBRARY -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.1/web3.min.js"
+      integrity="sha512-GKw4QT/RccGJIwQxY3MhyiQ5pHrhQ8SuKFEafV+WcpOvtz7iYFQuQGFCvmGlHLctJTe8KrWU1FqvF7VOkEAJtw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script type="text/javascript" src="https://bundle.run/buffer@6.0.3"></script>
+
+
+
+    <script type="text/javascript" src="https://static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+
+
+
+<div class="container-fluid">
+<div class="row">
+
+
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#"><img src="./logo.svg" style="max-width: 164px;" alt=""></a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-nav">
+    <div class="nav-item text-nowrap">
+      <a class="nav-link px-3 logout-btn" href="#">Log out</a>
+    </div>
+  </div>
+</header>
+
+
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="position-sticky pt-3">
+        <p style="text-align: center;padding: 40px 0px;color: #999;">
+            Logged in as:<br/>
+            <span class="wallet-address"></span>
+        </p>
+      </div>
+    </nav>
+
+
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"> 
+  <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top: 20px;font-weight: bold;">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="nfts-tab" data-bs-toggle="tab" data-bs-target="#nfts" type="button" role="tab" aria-controls="nfts" aria-selected="true">NFTs</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="lores-tab" data-bs-toggle="tab" data-bs-target="#lores" type="button" role="tab" aria-controls="lores" aria-selected="false">Lores</button>
+          </li>
+  </ul>
+
+
+
+
+<!-- Tab panes -->
+<div class="tab-content">
+
+  <!-- load all the NFTs in here ---->  
+  <div class="tab-pane active" id="nfts" role="tabpanel" aria-labelledby="nfts-tab">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">My NFTs</h1>
+                <p>Showing the first 50 NFTs in this wallet</p>
+          </div>
+          <div class="container" style="margin-bottom: 50px;">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 myNFTs">
+
+                   <div class="d-flex align-items-center">
+                      <strong>Loading NFTs ...</strong>
+                      <div class="spinner-border ml-auto text-warning" role="status" aria-hidden="true"></div>
+                    </div>
+
+                </div>
+          </div>
+    </div><!---- nfts tab pane finished ------>
+
+
+    <!-- load all the lores in here ---->
+    <div class="tab-pane" id="lores" role="tabpanel" aria-labelledby="lores-tab">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">My Lores</h1>
+                <p>Showing the recent 10 Lores by you</p>
+          </div>
+          <div class="container" style="margin-bottom: 50px;background: #f9f9f9;">
+                   <div class="align-items-center loreLoader">   
+                                   <strong>Loading Lores ...</strong>
+                                   <div class="spinner-border ml-auto text-warning" role="status" aria-hidden="true"></div>
+                   </div>
+                   <div class="row">    
+                                   <div class="col-md-2">
+                                   </div>
+                                   <div class="col-md-8 myLores">                         
+                                   </div>
+                                    <div class="col-md-2">
+                                    </div>
+                    </div>
+                </div>
+    </div><!---- lore tab pane finished ------>
+</div>
+
+
+
+<!-- Extra large modal to house the editor -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editorModal" id="editorModal" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title nftName">Name</h5>
+      </div>
+
+        <div class="modal-body" style="background: #f9f9f9;">
+            <div class="container">
+                <div class="alert alert-primary" role="alert">
+                        You cannot edit lores, you can hide and post as many as you like.
+                </div>
+
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2">
+                    <div class="col-md-3">
+                        <img class="card-img-top nftPic" src="" alt="Card image cap" style="padding: 10px;">
+
+                        <select class="form-select selectTag" aria-label="select tag" style="max-width: 90%;margin: auto;">
+                          <option selected>Select a lore type</option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+
+
+                    </div>
+                    <div class="col-md-9">
+                            <div id="editorjs"></div>
+                            <div id="successMessage">
+                                
+                              <img src="https://img.icons8.com/external-flaticons-flat-flat-icons/344/external-checkmark-relationship-flaticons-flat-flat-icons.png" style="width: 75px;display: block;margin: 72px auto;">
+                              <h5 style="text-align: center;display: block;margin-bottom: 160px;">Lore was posted successfully. You can close this window.</h5>      
+                   
+                            </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal-footer">
+                <button class="btn btn-primary post-btn" type="submit">
+                    Sign & Post Lore
+                </button>
+        </div>
+
+    </div>
+  </div>
+</div><!---- modal finished ------>
+
+
+
+
+<!-- Large modal to hide confirmation dialog to hide NFT -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="hideModal" id="hideModal" aria-hidden="true">
+  <div class="modal-dialog modal-l">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title nftName1">Name</h5>
+      </div>
+
+        <div class="modal-body">
+            <div class="container">
+                <div class="row">
+                    <p class="confMessage">Once the Lore is hidden, it's removed from your feed and cannot be brought back. Do you wish to proceed?</p>
+                    <span class="successHide">
+                        <img src="https://img.icons8.com/external-flaticons-flat-flat-icons/344/external-checkmark-relationship-flaticons-flat-flat-icons.png" style="width: 68px;display: block;margin: 13px auto;">
+                        <p style="text-align: center;display: block;margin-bottom: 47px;">Lore was hidden successfully. You can close this window.</p> 
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer hide-modal-footer">
+                <button class="btn btn-danger hide-btn" type="submit">
+                    Sign & Hide Lore
+                </button>
+        </div>
+    </div>
+  </div>
+</div><!---- modal finished ------>
+
+
+
+<!-- Extra-large modal to display the lore content entered by people -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="detailModal" id="detailModal" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="nftNameLoreDetail">Name</h5>
+      </div>
+        <div class="modal-body" style="background: #f9f9f9;">
+            <div class="container">
+
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2">
+                    <div class="col-md-2">
+                        <img class="card-img-top" id="nftPic1" src="" alt="Card image cap" style="padding: 10px;">
+
+                    </div>
+                    <div class="col-md-10">
+                            <div id="loreDetailBlock"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>       
+    </div>
+  </div>
+</div><!---- modal finished ------>
+
+
+
+
+</main>
+
+</div>
+</div>
+</body>
+
+<script type="text/javascript" src="./demoUtils.js"></script>
+<script type="text/javascript" src="./dashboard.js"></script>
+<script type="text/javascript" src="./editorinit.js"></script>
+<script type="text/javascript" src="./hideOneLore.js"></script>
+<script type="text/javascript" src="./postOneLore.js"></script>
+</html>
