@@ -136,13 +136,14 @@ async function renderLores() {
     lores.forEach(lore => {
         
         loreTime = timeDifference(current,lore.createdAt*1000);
-        if(lore.previewImageUrl){
+        if(lore.previewImageUrl !='none'){
         loreImage = `<div class="feed-image p-3 px-3"><img class="img-fluid img-responsive" src="${lore.previewImageUrl}"></div>`;
         } else { loreImage = ''; } 
 
-        if(lore.previewText){
-        loreImage = `<div class="p-3 px-3"><span>${lore.previewText}</span></div>`;
+        if(lore.previewText != ''){
+        loreText = `<div class="p-3 px-3"><span>${lore.previewText}</span></div>`;
         } else { loreText = ''; } 
+
 
 
         let htmlSegment = `<div class="bg-white border mt-4">
